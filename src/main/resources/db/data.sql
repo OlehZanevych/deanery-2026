@@ -42,3 +42,31 @@ VALUES (1, 'Faculty of Biology', 'bioweb.lnu.edu.ua', 'biolog@lnu.edu.ua', '274-
        (19, 'Faculty of Law', 'law.lnu.edu.ua', 'law.faculty@lnu.edu.ua', '239-41-02',
         'вул. Січових Стрільців, 14, м. Львів, 79000', 'Faculty of Law is ...');
 SELECT setval('faculties_id_seq', 19);
+
+
+INSERT INTO departments (id, name, faculty_id, email, phone, info)
+VALUES (1,  'Department of Botany',                          1,  'botany@lnu.edu.ua',          '274-03-73', 'Department of Botany is ...'),
+       (2,  'Department of Zoology',                         1,  'zoology@lnu.edu.ua',          '274-03-74', 'Department of Zoology is ...'),
+       (3,  'Department of Physical Geography',              2,  'physgeo@lnu.edu.ua',          '239-41-63', 'Department of Physical Geography is ...'),
+       (4,  'Department of Economic Geography',              2,  'ecogeo@lnu.edu.ua',           '239-41-64', 'Department of Economic Geography is ...'),
+       (5,  'Department of Mineralogy',                      3,  'mineralogy@lnu.edu.ua',       '261-60-57', 'Department of Mineralogy is ...'),
+       (6,  'Department of Economic Theory',                 4,  'econtheory@lnu.edu.ua',       '239-41-69', 'Department of Economic Theory is ...'),
+       (7,  'Department of Computer Engineering',            5,  'compeng@lnu.edu.ua',          '261-14-92', 'Department of Computer Engineering is ...'),
+       (8,  'Department of Electronic Systems',              5,  'elecsys@lnu.edu.ua',          '261-14-93', 'Department of Electronic Systems is ...'),
+       (9,  'Department of Journalism',                      6,  'journalism@lnu.edu.ua',       '239-47-52', 'Department of Journalism is ...'),
+       (10, 'Department of English Philology',               7,  'english@lnu.edu.ua',          '239-47-17', 'Department of English Philology is ...'),
+       (11, 'Department of History of Ukraine',              8,  'histukr@lnu.edu.ua',          '261-03-29', 'Department of History of Ukraine is ...'),
+       (12, 'Department of Theatre Arts',                    9,  'theatre@lnu.edu.ua',          '239-41-98', 'Department of Theatre Arts is ...'),
+       (13, 'Department of Algebra and Logic',               10, 'algebra@lnu.edu.ua',          '239-41-75', 'Department of Algebra and Logic is ...'),
+       (14, 'Department of Mathematical Analysis',           10, 'mathanalysis@lnu.edu.ua',     '239-41-76', 'Department of Mathematical Analysis is ...'),
+       (15, 'Department of International Relations',         11, 'intrel@lnu.edu.ua',           '255-43-18', 'Department of International Relations is ...'),
+       (16, 'Department of Pedagogy',                        12, 'pedagogy@lnu.edu.ua',         '239-42-31', 'Department of Pedagogy is ...'),
+       (17, 'Department of Applied Mathematics',             13, 'appmath@lnu.edu.ua',          '239-41-87', 'Department of Applied Mathematics is ...'),
+       (18, 'Department of Informatics',                     13, 'informatics@lnu.edu.ua',      '239-41-88', 'Department of Informatics is ...'),
+       (19, 'Department of Finance',                         14, 'finance@lnu.edu.ua',          '235-64-51', 'Department of Finance is ...'),
+       (20, 'Department of Theoretical Physics',             15, 'theorphys@lnu.edu.ua',        '272-70-65', 'Department of Theoretical Physics is ...'),
+       (21, 'Department of Ukrainian Literature',            16, 'ukrlit@lnu.edu.ua',           '239-41-59', 'Department of Ukrainian Literature is ...'),
+       (22, 'Department of Philosophy',                      17, 'philosophy@lnu.edu.ua',       '239-45-80', 'Department of Philosophy is ...'),
+       (23, 'Department of Organic Chemistry',               18, 'orgchem@lnu.edu.ua',          '260-03-92', 'Department of Organic Chemistry is ...'),
+       (24, 'Department of Civil Law',                       19, 'civillaw@lnu.edu.ua',         '239-41-03', 'Department of Civil Law is ...');
+SELECT setval('departments_id_seq', 24);
