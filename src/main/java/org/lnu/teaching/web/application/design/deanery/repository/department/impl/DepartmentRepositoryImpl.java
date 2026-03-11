@@ -7,6 +7,7 @@ import org.lnu.teaching.web.application.design.deanery.entity.department.Departm
 import org.lnu.teaching.web.application.design.deanery.exception.DataConflictException;
 import org.lnu.teaching.web.application.design.deanery.exception.NotFoundException;
 import org.lnu.teaching.web.application.design.deanery.repository.department.DepartmentRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
@@ -118,6 +119,13 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
                 throw new DataConflictException(String.format("Department with name \"%s\" already exists!", departmentEntity.getName()));
             }
             throw e;
+        } catch (DataIntegrityViolationException e) {
+            String errorMessage = e.getCause().getMessage();
+            if (errorMessage.contains("Key (faculty_id)=") && errorMessage.contains("is not present in table \"faculties\"")) {
+                throw new NotFoundException("Faculty with id " + departmentEntity.getFacultyId() + " does not exist!");
+            }
+
+            throw e;
         }
 
         Long id = (Long) keyHolder.getKeys().get("id");
@@ -182,6 +190,13 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
                 throw new DataConflictException(String.format("Department with name \"%s\" already exists!", departmentEntity.getName()));
             }
             throw e;
+        } catch (DataIntegrityViolationException e) {
+            String errorMessage = e.getCause().getMessage();
+            if (errorMessage.contains("Key (faculty_id)=") && errorMessage.contains("is not present in table \"faculties\"")) {
+                throw new NotFoundException("Faculty with id " + departmentEntity.getFacultyId() + " does not exist!");
+            }
+
+            throw e;
         }
 
         if (affectedRows == 0) {
@@ -228,6 +243,13 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
             if (e.getCause().getMessage().contains("duplicate key value violates unique constraint \"departments_name_key\"")) {
                 throw new DataConflictException(String.format("Department with name \"%s\" already exists!", departmentPatch.getName()));
             }
+            throw e;
+        } catch (DataIntegrityViolationException e) {
+            String errorMessage = e.getCause().getMessage();
+            if (errorMessage.contains("Key (faculty_id)=") && errorMessage.contains("is not present in table \"faculties\"")) {
+                throw new NotFoundException("Faculty with id " + departmentPatch.getFacultyId() + " does not exist!");
+            }
+
             throw e;
         }
 
