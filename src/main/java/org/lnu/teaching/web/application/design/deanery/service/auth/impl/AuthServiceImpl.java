@@ -63,7 +63,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void verifyAuthority(Auth auth) {
-        String jwtToken = extractJwtToken(httpServletRequest.getHeader(AUTH_TOKEN_HEADER));
+        String authHeader = httpServletRequest.getHeader(AUTH_TOKEN_HEADER);
+        String jwtToken = extractJwtToken(authHeader);
         Map<String, Object> userData = parseUserData(jwtToken);
         checkAdminAccess(auth, userData);
         refreshToken(new UserData((String) userData.get(USERNAME_PROPERTY), (Boolean) userData.get(IS_ADMIN_PROPERTY)));
