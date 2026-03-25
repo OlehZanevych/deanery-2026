@@ -3,6 +3,7 @@ package org.lnu.teaching.web.application.design.deanery.controller.department;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
+import org.lnu.teaching.web.application.design.deanery.annotation.Auth;
 import org.lnu.teaching.web.application.design.deanery.dto.common.ValueDto;
 import org.lnu.teaching.web.application.design.deanery.dto.department.BaseDepartmentDto;
 import org.lnu.teaching.web.application.design.deanery.dto.department.DepartmentDto;
@@ -24,12 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Auth
 @RestController
 @AllArgsConstructor
 @RequestMapping("departments")
 public class DepartmentController {
     private final DepartmentService departmentService;
 
+    @Auth(isAdmin = true)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DepartmentDto create(@RequestBody BaseDepartmentDto department) {
@@ -67,18 +70,21 @@ public class DepartmentController {
         return departmentService.find(id);
     }
 
+    @Auth(isAdmin = true)
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable Long id, @RequestBody BaseDepartmentDto departmentDto) {
         departmentService.update(id, departmentDto);
     }
 
+    @Auth(isAdmin = true)
     @PatchMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void patch(@PathVariable Long id, @RequestBody DepartmentPatch departmentPatch) {
         departmentService.patch(id, departmentPatch);
     }
 
+    @Auth(isAdmin = true)
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
