@@ -63,38 +63,41 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void verifyAuthority(Auth auth) {
-        String authHeader = httpServletRequest.getHeader(AUTH_TOKEN_HEADER);
+        String jwtToken = extractJwtToken(httpServletRequest.getHeader(AUTH_TOKEN_HEADER));
+        Map<String, Object> userData = parseUserData(jwtToken);
+        checkAdminAccess(auth, userData);
+        refreshToken(new UserData((String) userData.get(USERNAME_PROPERTY), (Boolean) userData.get(IS_ADMIN_PROPERTY)));
+    }
+
+    private String extractJwtToken(String authHeader) {
         if (authHeader == null) {
             throw new UnauthenticatedException("Missed Authorization header!");
         }
 
-        String[] authHeaderParts = authHeader.trim().split("\\s+");
-        if (authHeaderParts.length != 2 || !TOKEN_PREFIX.equals(authHeaderParts[0])) {
+        String[] parts = authHeader.trim().split("\\s+");
+        if (parts.length != 2 || !TOKEN_PREFIX.equals(parts[0])) {
             throw new UnauthenticatedException("Invalid format of Auth header!");
         }
 
-        String jwtToken = authHeaderParts[1];
+        return parts[1];
+    }
 
-        Map<String, Object> userData;
+    private Map<String, Object> parseUserData(String jwtToken) {
         try {
             Claims claims = Jwts.parser()
                     .setSigningKey(jwtSigningKey)
                     .build()
                     .parseClaimsJws(jwtToken)
                     .getBody();
-
-            userData = claims.get(USER_DATA_CLAIMS, Map.class);
-
-            refreshToken(new UserData((String) userData.get(USERNAME_PROPERTY) ,(Boolean) userData.get(IS_ADMIN_PROPERTY)));
+            return claims.get(USER_DATA_CLAIMS, Map.class);
         } catch (RuntimeException e) {
             throw new UnauthenticatedException("Invalid JWT token!");
         }
+    }
 
-        if (auth.isAdmin()) {
-            boolean isAdmin = (Boolean) userData.get(IS_ADMIN_PROPERTY);
-            if (!isAdmin) {
-                throw new UnauthorizedException("Customer is not authorized to call this API!");
-            }
+    private void checkAdminAccess(Auth auth, Map<String, Object> userData) {
+        if (auth.isAdmin() && !(Boolean) userData.get(IS_ADMIN_PROPERTY)) {
+            throw new UnauthorizedException("Customer is not authorized to call this API!");
         }
     }
 
