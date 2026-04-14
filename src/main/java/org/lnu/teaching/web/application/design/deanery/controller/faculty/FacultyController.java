@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AllArgsConstructor;
 import org.lnu.teaching.web.application.design.deanery.annotation.Auth;
+import org.lnu.teaching.web.application.design.deanery.annotation.TrackExecution;
 import org.lnu.teaching.web.application.design.deanery.dto.common.ValueDto;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.BaseFacultyDto;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.FacultyDto;
@@ -27,6 +28,7 @@ import java.util.List;
 
 @Auth
 @RestController
+@TrackExecution
 @AllArgsConstructor
 @RequestMapping("faculties")
 public class FacultyController {
