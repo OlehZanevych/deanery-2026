@@ -1,6 +1,7 @@
 package org.lnu.teaching.web.application.design.deanery.service.faculty.impl;
 
 import lombok.AllArgsConstructor;
+import org.lnu.teaching.web.application.design.deanery.annotation.TrackExecution;
 import org.lnu.teaching.web.application.design.deanery.dto.common.ValueDto;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.BaseFacultyDto;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.FacultyDto;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@TrackExecution
 @AllArgsConstructor
 public class FacultyServiceImpl implements FacultyService {
     
@@ -36,12 +38,14 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     @Override
+    @TrackExecution(inExecutionTimeEnabled = false)
     public ValueDto<Integer> count(FacultyFilterOptions filterOptions) {
         int count = facultyRepository.count(filterOptions);
         return new ValueDto<>(count);
     }
 
     @Override
+    @TrackExecution(inEnabled = false)
     public FacultyDto find(Long id) {
         FacultyEntity facultyEntity = facultyRepository.find(id);
         return facultyMapper.toDto(facultyEntity);

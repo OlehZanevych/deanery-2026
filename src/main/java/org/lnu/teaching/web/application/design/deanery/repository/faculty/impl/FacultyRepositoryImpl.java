@@ -1,6 +1,7 @@
 package org.lnu.teaching.web.application.design.deanery.repository.faculty.impl;
 
 import lombok.AllArgsConstructor;
+import org.lnu.teaching.web.application.design.deanery.annotation.TrackExecution;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.FacultyPatch;
 import org.lnu.teaching.web.application.design.deanery.dto.faculty.query.params.FacultyFilterOptions;
 import org.lnu.teaching.web.application.design.deanery.entity.faculty.FacultyEntity;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@TrackExecution
 @AllArgsConstructor
 public class FacultyRepositoryImpl implements FacultyRepository {
 
