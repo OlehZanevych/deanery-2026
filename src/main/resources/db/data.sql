@@ -70,3 +70,65 @@ VALUES (1,  'Department of Botany',                          1,  'botany@lnu.edu
        (23, 'Department of Organic Chemistry',               18, 'orgchem@lnu.edu.ua',          '260-03-92', 'Department of Organic Chemistry is ...'),
        (24, 'Department of Civil Law',                       19, 'civillaw@lnu.edu.ua',         '239-41-03', 'Department of Civil Law is ...');
 SELECT setval('departments_id_seq', 24);
+
+INSERT INTO specialities (id, name, code, department_id, info)
+VALUES (1, 'Computer Engineering',             '123', 7,  'Speciality of Computer Engineering at Faculty of Electronics and Computer Technologies'),
+       (2, 'Applied Mathematics',              '113', 17, 'Speciality of Applied Mathematics at Faculty of Applied Mathematics and Informatics'),
+       (3, 'Informatics',                      '126', 18, 'Speciality of Informatics at Faculty of Applied Mathematics and Informatics'),
+       (4, 'Software Engineering',             '121', 7,  'Speciality of Software Engineering at Faculty of Electronics and Computer Technologies'),
+       (5, 'Mathematics',                      '111', 13, 'Speciality of Mathematics at Faculty of Mechanics and Mathematics');
+SELECT setval('specialities_id_seq', 5);
+
+INSERT INTO curricula (id, name, speciality_id, year, degree, duration_years, info)
+VALUES (1, 'Bachelor of Computer Engineering 2022',   1, 2022, 'bachelor', 4, 'Curriculum for bachelor degree in Computer Engineering, approved in 2022'),
+       (2, 'Master of Computer Engineering 2023',     1, 2023, 'master',   2, 'Curriculum for master degree in Computer Engineering, approved in 2023'),
+       (3, 'Bachelor of Applied Mathematics 2022',    2, 2022, 'bachelor', 4, 'Curriculum for bachelor degree in Applied Mathematics, approved in 2022'),
+       (4, 'Bachelor of Informatics 2021',            3, 2021, 'bachelor', 4, 'Curriculum for bachelor degree in Informatics, approved in 2021'),
+       (5, 'Bachelor of Software Engineering 2023',   4, 2023, 'bachelor', 4, 'Curriculum for bachelor degree in Software Engineering, approved in 2023'),
+       (6, 'Bachelor of Mathematics 2020',            5, 2020, 'bachelor', 4, 'Curriculum for bachelor degree in Mathematics, approved in 2020');
+SELECT setval('curricula_id_seq', 6);
+
+INSERT INTO academic_groups (id, name, curriculum_id, enrollment_year, info)
+VALUES (1,  'ECM-11', 1, 2022, 'First group of Computer Engineering, enrolled in 2022'),
+       (2,  'ECM-12', 1, 2022, 'Second group of Computer Engineering, enrolled in 2022'),
+       (3,  'ECM-13', 1, 2022, 'Third group of Computer Engineering, enrolled in 2022'),
+       (4,  'ECM-21', 2, 2023, 'First master group of Computer Engineering, enrolled in 2023'),
+       (5,  'PMM-11', 3, 2022, 'First group of Applied Mathematics, enrolled in 2022'),
+       (6,  'PMM-12', 3, 2022, 'Second group of Applied Mathematics, enrolled in 2022'),
+       (7,  'INF-11', 4, 2021, 'First group of Informatics, enrolled in 2021'),
+       (8,  'INF-12', 4, 2021, 'Second group of Informatics, enrolled in 2021'),
+       (9,  'SE-11',  5, 2023, 'First group of Software Engineering, enrolled in 2023'),
+       (10, 'MTH-11', 6, 2020, 'First group of Mathematics, enrolled in 2020');
+SELECT setval('academic_groups_id_seq', 10);
+
+INSERT INTO lecturers (id, first_name, middle_name, last_name, email, phone, title, department_id, info)
+VALUES (1, 'Ivan',     'Vasyliovych', 'Petrenko',   'i.petrenko@lnu.edu.ua',   '239-41-91', 'Professor',              7,  'Professor at Department of Computer Engineering'),
+       (2, 'Olha',     'Mykolaivna',  'Kovalenko',  'o.kovalenko@lnu.edu.ua',  '239-41-87', 'Associate Professor',    17, 'Associate Professor at Department of Applied Mathematics'),
+       (3, 'Mykhailo', 'Petrovych',   'Shevchenko', 'm.shevchenko@lnu.edu.ua', '239-41-88', 'Senior Lecturer',        18, 'Senior Lecturer at Department of Informatics'),
+       (4, 'Nataliia', 'Ivanivna',    'Bondarenko', 'n.bondarenko@lnu.edu.ua', '239-41-92', 'Associate Professor',    7,  'Associate Professor at Department of Computer Engineering'),
+       (5, 'Andrii',   'Stepanovych', 'Lysenko',    'a.lysenko@lnu.edu.ua',    '239-41-75', 'Professor',              13, 'Professor at Department of Algebra and Logic'),
+       (6, 'Tetiana',  'Oleksandrivna','Marchenko',  't.marchenko@lnu.edu.ua',  '239-41-76', 'Assistant Professor',    14, 'Assistant Professor at Department of Mathematical Analysis');
+SELECT setval('lecturers_id_seq', 6);
+
+INSERT INTO courses (id, name, credits, hours, semester, curriculum_id, lecturer_id, info)
+VALUES (1,  'Programming Fundamentals',          4, 120, 1, 1, 1,    'Introduction to programming using C/C++'),
+       (2,  'Algorithms and Data Structures',    5, 150, 2, 1, 1,    'Core algorithms, complexity analysis and standard data structures'),
+       (3,  'Computer Architecture',             4, 120, 1, 1, 4,    'Organization of computer systems and assembly language basics'),
+       (4,  'Operating Systems',                 5, 150, 3, 1, 4,    'Process management, memory management, file systems'),
+       (5,  'Database Systems',                  4, 120, 3, 1, 3,    'Relational model, SQL, transactions and database design'),
+       (6,  'Web Technologies',                  4, 120, 4, 1, 1,    'HTML, CSS, JavaScript, REST API design principles'),
+       (7,  'Software Engineering',              3, 90,  5, 1, 4,    'SDLC, design patterns, testing strategies, agile methodologies'),
+       (8,  'Machine Learning',                  4, 120, 7, 1, 1,    'Supervised and unsupervised learning algorithms'),
+       (9,  'Mathematical Analysis I',           5, 150, 1, 3, 2,    'Limits, continuity, differential calculus'),
+       (10, 'Mathematical Analysis II',          5, 150, 2, 3, 2,    'Integral calculus, series, multivariable calculus'),
+       (11, 'Linear Algebra',                    4, 120, 1, 3, 5,    'Vector spaces, linear transformations, eigenvalues'),
+       (12, 'Discrete Mathematics',              4, 120, 1, 5, 2,    'Logic, sets, relations, graph theory and combinatorics'),
+       (13, 'Object-Oriented Programming',       5, 150, 2, 4, 3,    'OOP principles, design patterns in Java'),
+       (14, 'Networks and Communications',       4, 120, 4, 4, 4,    'OSI model, TCP/IP stack, network protocols'),
+       (15, 'Probability Theory and Statistics', 4, 120, 3, 3, 5,    'Probability distributions, statistical inference'),
+       (16, 'Differential Equations',            4, 120, 3, 6, 6,    'ODEs, PDEs, numerical methods for differential equations'),
+       (17, 'Advanced Algorithms',               5, 150, 1, 2, 1,    'Graph algorithms, dynamic programming, NP-completeness'),
+       (18, 'Distributed Systems',               4, 120, 2, 2, 4,    'Distributed computing models, consistency, CAP theorem'),
+       (19, 'Functional Programming',            3, 90,  2, 5, 3,    'Lambda calculus, Haskell, functional patterns'),
+       (20, 'Computer Vision',                   4, 120, 8, 1, 1,    'Image processing, feature extraction, deep learning for vision');
+SELECT setval('courses_id_seq', 20);
